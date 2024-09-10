@@ -150,9 +150,32 @@ html, body {
 .content {
   display: flex;
   flex-grow: 1;
+  flex-direction: column;
+  gap: 20px;
   width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
 
   background: white;
+  overflow-y: auto;
+}
+
+.message__container {
+  display: flex;
+  flex-direction: column;
+  align-self: end;
+  width: fit-content;
+  padding: 10px;
+  border-radius: 5px;
+
+  background: mediumseagreen;
+}
+
+.message__header {
+  font-size: 14px;
+  font-style: italic;
+
+  color: #333;
 }
 
 .footer {
