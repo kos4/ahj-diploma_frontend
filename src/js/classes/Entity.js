@@ -14,6 +14,17 @@ export default class Entity {
     });
   }
 
+  loadMore(count, userId, callback) {
+    this.createRequest({
+      input: 'loadMore',
+      init: {
+        method: 'POST',
+        body: JSON.stringify({count, userId}),
+      },
+      callback
+    });
+  }
+
   async createRequest(options) {
     const response = await fetch(this.host + options.input, options.init);
     options.callback(await response.json());

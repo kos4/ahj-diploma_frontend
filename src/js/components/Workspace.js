@@ -1,7 +1,11 @@
+import {debounce} from "../functions";
+import Entity from "../classes/Entity";
+
 export default class Workspace {
   constructor(app, user) {
     this.app = app;
     this.user = user;
+    this.entity = new Entity();
   }
 
   init() {
@@ -14,6 +18,16 @@ export default class Workspace {
     this.websocket.addEventListener('open', () => {
       this.renderChat();
       this.enterSendForm();
+
+      const htmlContent = document.querySelector('.content');
+      htmlContent.addEventListener('scroll', (event) => {
+        const element = event.target;
+        const count = element.querySelectorAll('.message__container').length;
+
+        if (element.scrollTop === 0) {
+          this.entity.loadMore(count, this.user.id, this.onLoadMore.bind(this, element.offsetHeight));
+        }
+      });
     });
 
     this.websocket.addEventListener('message', (e) => {
@@ -38,6 +52,14 @@ export default class Workspace {
         }
       }
     });
+  }
+
+  onLoadMore(scroll, response) {
+    if (response.status === 'ok' && response.message.length > 0) {
+      response.message.forEach(item => {
+        this.renderMessage(item, 'afterbegin', scroll);
+      });
+    }
   }
 
   enterSendForm() {
@@ -65,11 +87,22 @@ export default class Workspace {
     this.websocket.send(json);
   }
 
-  renderMessage(data) {
+  renderMessage(data, place = 'beforeend', scroll = 0) {
     const chat = document.querySelector('.content');
     const message = this.markupMessage(data);
-    chat.insertAdjacentHTML('beforeend', message);
-    chat.scrollTop = chat.scrollHeight;
+    chat.insertAdjacentHTML(place, message);
+    if (!scroll) {
+      chat.scrollTop = chat.scrollHeight;
+    } else {
+      chat.scrollTop = scroll;
+    }
+  }
+
+  convertLink(text) {
+    const regex = /(http[s]*:\/\/(\S+))/gm;
+    const subst = `<a href="$1" target="_blank">$2</a>`;
+
+    return text.replace(regex, subst);
   }
 
   renderChat() {
@@ -77,10 +110,12 @@ export default class Workspace {
   }
 
   markupMessage(data) {
+    const message = this.convertLink(data.message);
+
     return `
       <div class="message__container">
         <div class="message__container-interlocutor">
-          ${data.message}
+          ${message}
         </div>
         <div class="message__header">
           ${new Date(data.date).toLocaleDateString(undefined, {

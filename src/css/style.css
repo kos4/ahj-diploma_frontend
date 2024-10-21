@@ -171,6 +171,10 @@ html, body {
   background: mediumseagreen;
 }
 
+.message__container-interlocutor a {
+  color: darkred;
+}
+
 .message__header {
   font-size: 14px;
   font-style: italic;
