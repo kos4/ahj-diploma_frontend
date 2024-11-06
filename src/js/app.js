@@ -1,5 +1,5 @@
 import Login from "./components/Login";
-import Workspace from "./components/Workspace";
+import Workspace from "./components/workspace/Workspace";
 
 const app = document.querySelector('.app');
 const user = JSON.parse(localStorage.getItem('user'));

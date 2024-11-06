@@ -1,5 +1,5 @@
 import Entity from "../classes/Entity";
-import Workspace from "./Workspace";
+import Workspace from "./workspace/Workspace";
 
 export default class Login {
   constructor(app) {

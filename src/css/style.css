@@ -122,7 +122,16 @@ html, body {
 }
 
 .form {
+  display: flex;
   width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  gap: 20px;
+  align-items: start;
+}
+
+.form__files {
+  display: none;
 }
 
 .form__input {
@@ -183,22 +192,38 @@ html, body {
 }
 
 .footer {
-  display: flex;
   width: 100%;
-  height: 100px;
-  padding: 0 20px;
-  box-sizing: border-box;
-  gap: 20px;
-  align-items: center;
 
   background: #ccc;
 }
 
 .footer__files {
-  width: 40px;
-  height: 40px;
+  position: relative;
 
-  background: url("../images/files.png") center/cover no-repeat;
+  width: 40px;
+  height: 60px;
+
+  overflow: hidden;
+}
+
+.form__input-files {
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+}
+
+.footer__files-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: url("../images/files.png") center/contain no-repeat;
 
   cursor: pointer;
 }
@@ -206,6 +231,7 @@ html, body {
 .footer__message {
   display: flex;
   flex-grow: 1;
+  flex-direction: column;
 }
 
 .form__textarea {
@@ -219,18 +245,40 @@ html, body {
 
 .footer__audio {
   width: 40px;
-  height: 40px;
+  height: 60px;
 
-  background: url("../images/audio.png") center/cover no-repeat;
+  background: url("../images/audio.png") center/contain no-repeat;
 
   cursor: pointer;
 }
 
 .footer__video {
   width: 40px;
-  height: 40px;
+  height: 60px;
 
-  background: url("../images/video.png") center/cover no-repeat;
+  background: url("../images/video.png") center/contain no-repeat;
+
+  cursor: pointer;
+}
+
+.fileList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+}
+
+.fileList__item {
+  padding: 10px 0;
+  box-sizing: border-box;
+}
+
+.fileList__item-remove {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-left: 10px;
+
+  background: url("../images/close.png") center/cover no-repeat;
 
   cursor: pointer;
 }
