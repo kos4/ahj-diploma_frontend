@@ -282,3 +282,7 @@ html, body {
 
   cursor: pointer;
 }
+
+.filesUploadList__item {
+  display: block;
+}

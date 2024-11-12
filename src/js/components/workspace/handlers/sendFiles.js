@@ -1,7 +1,6 @@
-export default function sendFiles(webSoc, response) {
-  console.log(response)
-
+export default function sendFiles(webSoc, json, response) {
   if (response.status === 'ok' && response.message) {
-    //webSoc.sendMessage(response.message);
+    json.message = response.message;
+    webSoc.sendMessage(json);
   }
 }

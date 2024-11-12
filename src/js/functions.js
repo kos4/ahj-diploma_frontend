@@ -7,7 +7,7 @@ export function debounce(func, ms) {
 }
 
 export function convertLink(text) {
-  const regex = /(http[s]*:\/\/(\S+))/gm;
+  const regex = /(?<!")(http[s]*:\/\/(\S+))/gm;
   const subst = `<a href="$1" target="_blank">$2</a>`;
 
   return text.replace(regex, subst);
