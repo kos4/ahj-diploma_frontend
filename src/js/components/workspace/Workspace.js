@@ -22,12 +22,32 @@ export default class Workspace {
     const formMessage = document.getElementById('message');
     const fileContainer = document.querySelector('.footer__files');
     const fileInput = fileContainer.querySelector('.form__input-files');
-    
-    this.webSoc.fetchMessage();
+
+    this.webSoc.fetchMessage(this.downloadFile);
     this.webSoc.loadMessage(onScroll.bind(null, this.user));
     formMessage.addEventListener('keypress', onKeypressMessage.bind(null, this.webSoc, this.user));
     fileContainer.addEventListener('click', onClickFiles.bind(null, fileInput));
     fileInput.addEventListener('change', onChangeFiles);
+  }
+
+  downloadFile() {
+    const fileLinksDownload = document.querySelectorAll('.filesUploadList__item-link');
+
+    fileLinksDownload.forEach(el => {
+      el.addEventListener('click', event => {
+        event.preventDefault();
+        let link = document.createElement('a');
+        fetch(el.href)
+          .then(response => response.blob())
+            .then(blob => {
+              link.href = URL.createObjectURL(blob);
+              link.download = el.download;
+              link.click();
+              setTimeout(() => URL.revokeObjectURL(blob), 3000);
+            }
+          );
+      });
+    });
   }
 
   renderChat() {

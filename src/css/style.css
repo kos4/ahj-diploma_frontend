@@ -283,6 +283,10 @@ html, body {
   cursor: pointer;
 }
 
-.filesUploadList__item {
+.filesUploadList__item-image {
+  width: 100%;
+}
+
+.filesUploadList__item-link {
   display: block;
 }

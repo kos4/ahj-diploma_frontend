@@ -8,7 +8,7 @@ export default class WebSoc {
     this.websocket = new WebSocket(this.host);
   }
 
-  fetchMessage() {
+  fetchMessage(callback) {
     this.websocket.addEventListener('message', (e) => {
       const data = JSON.parse(e.data);
 
@@ -30,6 +30,8 @@ export default class WebSoc {
           }
         }
       }
+
+      callback();
     });
   }
 
