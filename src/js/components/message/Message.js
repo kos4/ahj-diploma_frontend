@@ -12,7 +12,7 @@ export default class Message {
     const message = this.markup(data);
     chat.insertAdjacentHTML(place, message);
     if (!scroll) {
-      chat.scrollTop = chat.scrollHeight;
+      setTimeout(() => chat.scrollTo(0, chat.scrollHeight), 100);
     } else {
       chat.scrollTop = scroll;
     }

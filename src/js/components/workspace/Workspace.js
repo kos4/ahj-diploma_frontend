@@ -4,6 +4,7 @@ import onScroll from "./handlers/onScroll";
 import onClickFiles from "./handlers/onClickFiles";
 import onKeypressMessage from "./handlers/onKeypressMessage";
 import onChangeFiles from "./handlers/onChangeFiles";
+import onDropFiles from "./handlers/onDropFiles";
 
 export default class Workspace {
   constructor(app, user) {
@@ -22,12 +23,15 @@ export default class Workspace {
     const formMessage = document.getElementById('message');
     const fileContainer = document.querySelector('.footer__files');
     const fileInput = fileContainer.querySelector('.form__input-files');
+    const chatContainer = document.querySelector('.content');
 
     this.webSoc.fetchMessage(this.downloadFile);
     this.webSoc.loadMessage(onScroll.bind(null, this.user));
     formMessage.addEventListener('keypress', onKeypressMessage.bind(null, this.webSoc, this.user));
     fileContainer.addEventListener('click', onClickFiles.bind(null, fileInput));
     fileInput.addEventListener('change', onChangeFiles);
+    chatContainer.addEventListener('dragover', event => event.preventDefault());
+    chatContainer.addEventListener('drop', onDropFiles.bind(null, fileInput));
   }
 
   downloadFile() {
