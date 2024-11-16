@@ -3,6 +3,17 @@ import {createRequest} from "../createRequest";
 
 export default class Entity {
 
+  loadSchedule(userId, callback) {
+    createRequest({
+      input: 'loadSchedule',
+      init: {
+        method: 'POST',
+        body: JSON.stringify({userId}),
+      },
+      callback
+    });
+  }
+
   loginUser(form, callback) {
     createRequest({
       input: 'login',

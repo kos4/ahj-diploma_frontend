@@ -5,6 +5,7 @@ import onClickFiles from "./handlers/onClickFiles";
 import onKeypressMessage from "./handlers/onKeypressMessage";
 import onChangeFiles from "./handlers/onChangeFiles";
 import onDropFiles from "./handlers/onDropFiles";
+import {initSchedule} from "./handlers/schedule";
 
 export default class Workspace {
   constructor(app, user) {
@@ -12,11 +13,13 @@ export default class Workspace {
     this.user = user;
     this.webSoc = new WebSoc(user);
     this.message = new Message();
+    this.schedule = { value: null };
   }
 
   init() {
     this.renderChat();
     this.subscribeOnEvents();
+    initSchedule(this.schedule, this.user);
   }
 
   subscribeOnEvents() {
@@ -27,7 +30,7 @@ export default class Workspace {
 
     this.webSoc.fetchMessage(this.downloadFile);
     this.webSoc.loadMessage(onScroll.bind(null, this.user));
-    formMessage.addEventListener('keypress', onKeypressMessage.bind(null, this.webSoc, this.user));
+    formMessage.addEventListener('keypress', onKeypressMessage.bind(null, this.webSoc, this.user, this.schedule));
     fileContainer.addEventListener('click', onClickFiles.bind(null, fileInput));
     fileInput.addEventListener('change', onChangeFiles);
     chatContainer.addEventListener('dragover', event => event.preventDefault());

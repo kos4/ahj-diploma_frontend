@@ -3,10 +3,11 @@ import Entity from "../../../classes/Entity";
 import sendFiles from "./sendFiles";
 import Popup from "../../Popup/Popup";
 import {geolocation} from "./geolocation";
+import {addSchedule} from "./schedule";
 
 const entity = new Entity();
 
-export default function onSubmitMessage(form, webSoc, user) {
+export default function onSubmitMessage(form, webSoc, user, schedule) {
   const message = form.message.value;
   const fileInput = document.querySelector('.form__input-files');
   const files = fileInput.files;
@@ -31,6 +32,13 @@ export default function onSubmitMessage(form, webSoc, user) {
 
   if (message === '@location') {
     geolocation(json, webSoc, popup, form);
+
+    return;
+  }
+
+  const scheduleMessage = message.match(/^@schedule (.*)/i);
+  if (scheduleMessage) {
+    addSchedule(scheduleMessage, form, json, webSoc, popup, user, schedule);
 
     return;
   }
