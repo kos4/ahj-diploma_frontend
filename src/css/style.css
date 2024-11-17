@@ -261,6 +261,41 @@ html, body {
   cursor: pointer;
 }
 
+.footer__record {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: none;
+}
+
+.footer__record:before {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 40px;
+
+  content: '';
+}
+
+.footer__record:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -10px 0 0 -10px;
+
+  display: block;
+  width: 20px;
+  height: 20px;
+
+  background: red;
+
+  content: '';
+}
+
 .fileList {
   display: flex;
   flex-wrap: wrap;

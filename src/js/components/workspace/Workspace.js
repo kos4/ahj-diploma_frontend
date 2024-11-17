@@ -6,7 +6,7 @@ import onKeypressMessage from "./handlers/onKeypressMessage";
 import onChangeFiles from "./handlers/onChangeFiles";
 import onDropFiles from "./handlers/onDropFiles";
 import {initSchedule} from "./handlers/schedule";
-import downloadFile from "./handlers/downloadFile";
+import onClickAudio from "./handlers/onClickAudio";
 
 export default class Workspace {
   constructor(app, user) {
@@ -38,7 +38,7 @@ export default class Workspace {
     fileInput.addEventListener('change', onChangeFiles);
     chatContainer.addEventListener('dragover', event => event.preventDefault());
     chatContainer.addEventListener('drop', onDropFiles.bind(null, fileInput));
-    btnAudio.addEventListener('click', () => {});
+    btnAudio.addEventListener('click', onClickAudio.bind(null, this.user, this.webSoc));
   }
 
   renderChat() {
