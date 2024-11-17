@@ -1,5 +1,6 @@
 import {convertLink, dateFormat} from "../../functions";
 import Files from "./Files";
+import downloadFile from "../workspace/handlers/downloadFile";
 
 export default class Message {
 
@@ -11,6 +12,8 @@ export default class Message {
     const chat = document.querySelector('.content');
     const message = this.markup(data);
     chat.insertAdjacentHTML(place, message);
+    downloadFile(chat);
+
     if (!scroll) {
       setTimeout(() => chat.scrollTo(0, chat.scrollHeight), 100);
     } else {

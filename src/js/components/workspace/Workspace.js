@@ -6,6 +6,7 @@ import onKeypressMessage from "./handlers/onKeypressMessage";
 import onChangeFiles from "./handlers/onChangeFiles";
 import onDropFiles from "./handlers/onDropFiles";
 import {initSchedule} from "./handlers/schedule";
+import downloadFile from "./handlers/downloadFile";
 
 export default class Workspace {
   constructor(app, user) {
@@ -23,38 +24,21 @@ export default class Workspace {
   }
 
   subscribeOnEvents() {
-    const formMessage = document.getElementById('message');
-    const fileContainer = document.querySelector('.footer__files');
+    const elMessage = this.app.querySelector('#message');
+    const fileContainer = this.app.querySelector('.footer__files');
     const fileInput = fileContainer.querySelector('.form__input-files');
-    const chatContainer = document.querySelector('.content');
+    const chatContainer = this.app.querySelector('.content');
+    const btnAudio = this.app.querySelector('.footer__audio');
+    const btnVideo = this.app.querySelector('.footer__video');
 
-    this.webSoc.fetchMessage(this.downloadFile);
+    this.webSoc.fetchMessage();
     this.webSoc.loadMessage(onScroll.bind(null, this.user));
-    formMessage.addEventListener('keypress', onKeypressMessage.bind(null, this.webSoc, this.user, this.schedule));
+    elMessage.addEventListener('keypress', onKeypressMessage.bind(null, this.webSoc, this.user, this.schedule));
     fileContainer.addEventListener('click', onClickFiles.bind(null, fileInput));
     fileInput.addEventListener('change', onChangeFiles);
     chatContainer.addEventListener('dragover', event => event.preventDefault());
     chatContainer.addEventListener('drop', onDropFiles.bind(null, fileInput));
-  }
-
-  downloadFile() {
-    const fileLinksDownload = document.querySelectorAll('.filesUploadList__item-link');
-
-    fileLinksDownload.forEach(el => {
-      el.addEventListener('click', event => {
-        event.preventDefault();
-        let link = document.createElement('a');
-        fetch(el.href)
-          .then(response => response.blob())
-            .then(blob => {
-              link.href = URL.createObjectURL(blob);
-              link.download = el.download;
-              link.click();
-              setTimeout(() => URL.revokeObjectURL(blob), 3000);
-            }
-          );
-      });
-    });
+    btnAudio.addEventListener('click', () => {});
   }
 
   renderChat() {
