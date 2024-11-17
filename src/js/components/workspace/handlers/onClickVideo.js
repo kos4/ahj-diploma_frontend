@@ -1,10 +1,10 @@
 import {recordMedia} from "./recordMedia";
 
-export default function onClickAudio(user, webSoc, event) {
+export default function onClickVideo(user, webSoc, event) {
   const currentElement = event.target;
   let stream, recorder;
 
   if (!currentElement.classList.contains('footer__record')) {
-    recordMedia(stream, recorder, {audio: true}, 'audio/mp3', currentElement, user, webSoc);
+    recordMedia(stream, recorder, {video: true, audio: true}, 'video/mp4', currentElement, user, webSoc);
   }
 }
