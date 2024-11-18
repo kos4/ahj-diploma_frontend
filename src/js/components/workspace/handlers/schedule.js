@@ -16,7 +16,7 @@ function showNotification(data, schedule) {
 }
 
 export function addSchedule(scheduleMessage, form, json, webSoc, popup, user, schedule) {
-  const strData = scheduleMessage[1].split('"');
+  const strData = scheduleMessage[2].split('"');
   const message = strData[1];
   const dateTime = {};
 

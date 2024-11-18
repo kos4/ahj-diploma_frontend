@@ -4,6 +4,11 @@ import sendFiles from "./sendFiles";
 import Popup from "../../Popup/Popup";
 import {geolocation} from "./geolocation";
 import {addSchedule} from "./schedule";
+import fetchWeather from "./fetchWeather";
+import getTime from "./getTime";
+import fetchCurrency from "./fetchCurrency";
+import fetchAffiche from "./fetchAffiche";
+import fetchMovie from "./fetchMovie";
 
 const entity = new Entity();
 
@@ -30,15 +35,36 @@ export default function onSubmitMessage(form, webSoc, user, schedule) {
     return;
   }
 
-  if (message === '@location') {
-    geolocation(json, webSoc, popup, form);
+  const commandMessage = message.match(/^@([a-zа-я]+) *(.*)/i);
 
-    return;
-  }
-
-  const scheduleMessage = message.match(/^@schedule (.*)/i);
-  if (scheduleMessage) {
-    addSchedule(scheduleMessage, form, json, webSoc, popup, user, schedule);
+  if (commandMessage) {
+    switch (commandMessage[1]) {
+      case 'location':
+        geolocation(json, webSoc, popup, form);
+        break;
+      case 'schedule':
+        addSchedule(commandMessage, form, json, webSoc, popup, user, schedule);
+        break;
+      case 'погода':
+        fetchWeather(form, webSoc, json);
+        break;
+      case 'время':
+        getTime(form, webSoc, commandMessage, json);
+        break;
+      case 'валюта':
+        fetchCurrency(form, webSoc, commandMessage, json);
+        break;
+      case 'афиша':
+        fetchAffiche(form, webSoc, json);
+        break;
+      case 'фильм':
+        fetchMovie(form, webSoc, json);
+        break;
+      default:
+        popup.render({
+          body: 'Данной команды не существует.',
+        });
+    }
 
     return;
   }
