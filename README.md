@@ -1,6 +1,8 @@
 # Дипломное задание к курсу «Продвинутый JavaScript в браузере». Chaos Organizer
 ---
 
+[![Build status](https://ci.appveyor.com/api/projects/status/63or2rmpyj7adg4n/branch/master?svg=true)](https://ci.appveyor.com/project/kos4/ahj-diploma-frontend/branch/master)
+
 ## Ключевые функции
 
 При первом подключении приложение попросит ввести логин и пароль, по которым будет создан пользователь.
