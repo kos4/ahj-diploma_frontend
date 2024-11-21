@@ -2,30 +2,33 @@ import Message from "../components/message/Message";
 
 export default class WebSoc {
   constructor(user) {
-    this.host = 'ws://localhost:8082';
+    this.host = "ws://localhost:8082";
     this.user = user;
     this.message = new Message();
     this.websocket = new WebSocket(this.host);
   }
 
   fetchMessage() {
-    this.websocket.addEventListener('message', (e) => {
+    this.websocket.addEventListener("message", (e) => {
       const data = JSON.parse(e.data);
 
-      if (data.status === 'connect') {
+      if (data.status === "connect") {
         this.user.connectionId = data.id;
-        this.websocket.send(JSON.stringify({
-          type: 'getData', userId: this.user.id,
-        }));
+        this.websocket.send(
+          JSON.stringify({
+            type: "getData",
+            userId: this.user.id,
+          }),
+        );
       } else {
         if (data.userId === this.user.id) {
-          if (Object.hasOwn(data, 'chat')) {
+          if (Object.hasOwn(data, "chat")) {
             if (data.id === this.user.connectionId) {
-              data.chat.forEach(item => {
+              data.chat.forEach((item) => {
                 this.message.render(item);
               });
             }
-          }else {
+          } else {
             this.message.render(data);
           }
         }
@@ -34,7 +37,7 @@ export default class WebSoc {
   }
 
   loadMessage(callback) {
-    this.websocket.addEventListener('open', callback);
+    this.websocket.addEventListener("open", callback);
   }
 
   sendMessage(json) {

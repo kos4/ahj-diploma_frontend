@@ -8,8 +8,8 @@ export default class Login {
 
   init() {
     this.app.innerHTML = this.markup();
-    this.form = this.app.querySelector('form');
-    this.form.addEventListener('submit', this.onSubmit.bind(this));
+    this.form = this.app.querySelector("form");
+    this.form.addEventListener("submit", this.onSubmit.bind(this));
   }
 
   onSubmit(event) {
@@ -21,11 +21,11 @@ export default class Login {
   }
 
   onLogin(response) {
-    if (response.status === 'ok') {
+    if (response.status === "ok") {
       const user = response.user;
       const workspace = new Workspace(this.app, user);
 
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(user));
       workspace.init();
     }
   }

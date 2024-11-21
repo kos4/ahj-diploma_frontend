@@ -1,15 +1,14 @@
-import {convertLink, dateFormat} from "../../functions";
+import { convertLink, dateFormat } from "../../functions";
 import Files from "./Files";
 import downloadFile from "../workspace/handlers/downloadFile";
 
 export default class Message {
-
   constructor() {
     this.files = new Files();
   }
 
-  render(data, place = 'beforeend', scroll = 0) {
-    const chat = document.querySelector('.content');
+  render(data, place = "beforeend", scroll = 0) {
+    const chat = document.querySelector(".content");
     const message = this.markup(data);
     chat.insertAdjacentHTML(place, message);
     downloadFile(chat);
@@ -24,9 +23,9 @@ export default class Message {
   markup(data) {
     const message = convertLink(data.message);
     const date = dateFormat(data.date);
-    let files = '';
+    let files = "";
 
-    if (data.hasOwnProperty('files')) {
+    if (Object.hasOwn(data, "files")) {
       files = this.files.render(data.files);
     }
 

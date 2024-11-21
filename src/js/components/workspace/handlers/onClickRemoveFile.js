@@ -1,6 +1,6 @@
 import updateFileList from "./updateFileList";
 
-export default function onClickRemoveFile (fileInput, event) {
+export default function onClickRemoveFile(fileInput, event) {
   const dt = new DataTransfer();
   const element = event.target;
   const file = element.dataset.file;

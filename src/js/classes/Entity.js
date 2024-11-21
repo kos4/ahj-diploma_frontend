@@ -1,50 +1,49 @@
-import {formDataToJson} from "../functions";
-import {createRequest} from "../createRequest";
+import { formDataToJson } from "../functions";
+import { createRequest } from "../createRequest";
 
 export default class Entity {
-
   loadSchedule(userId, callback) {
     createRequest({
-      input: 'loadSchedule',
+      input: "loadSchedule",
       init: {
-        method: 'POST',
-        body: JSON.stringify({userId}),
+        method: "POST",
+        body: JSON.stringify({ userId }),
       },
-      callback
+      callback,
     });
   }
 
   loginUser(form, callback) {
     createRequest({
-      input: 'login',
+      input: "login",
       init: {
-        method: 'POST',
+        method: "POST",
         body: formDataToJson(new FormData(form)),
       },
-      callback
+      callback,
     });
   }
 
   loadMore(count, userId, callback) {
     createRequest({
-      input: 'loadMore',
+      input: "loadMore",
       init: {
-        method: 'POST',
-        body: JSON.stringify({count, userId}),
+        method: "POST",
+        body: JSON.stringify({ count, userId }),
       },
-      callback
+      callback,
     });
   }
 
   sendFiles(formData, userId, callback) {
-    formData.append('userId', userId);
+    formData.append("userId", userId);
     createRequest({
-      input: 'sendFiles',
+      input: "sendFiles",
       init: {
-        method: 'POST',
+        method: "POST",
         body: formData,
       },
-      callback
+      callback,
     });
   }
 }

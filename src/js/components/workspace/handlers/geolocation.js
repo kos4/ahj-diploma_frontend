@@ -1,14 +1,14 @@
 export function geolocation(json, webSoc, popup, form) {
-  let sendMessage = '';
+  let sendMessage = "";
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
-      data => {
+      (data) => {
         sendMessage = `Ваша локация: ${data.coords.latitude} широты, ${data.coords.longitude} долготы.`;
         json.message = sendMessage;
         webSoc.sendMessage(json);
       },
-      error => {
+      (error) => {
         popup.render({
           title: `Ошибка. Код: ${error.code}`,
           body: error.message,
@@ -17,11 +17,11 @@ export function geolocation(json, webSoc, popup, form) {
       },
       {
         enableHighAccuracy: true,
-      }
+      },
     );
   } else {
     popup.render({
-      body: 'Ваш браузер не поддерживает определение Геолокации.',
+      body: "Ваш браузер не поддерживает определение Геолокации.",
     });
   }
 

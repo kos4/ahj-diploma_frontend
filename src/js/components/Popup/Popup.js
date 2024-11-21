@@ -1,23 +1,23 @@
-import './popup.css';
+import "./popup.css";
 
 export default class Popup {
   constructor() {
-    this.container = document.querySelector('body');
+    this.container = document.querySelector("body");
   }
 
   render(data) {
     const markup = this.markup(data);
 
     this.removePopup();
-    this.container.insertAdjacentHTML('beforeend', markup);
+    this.container.insertAdjacentHTML("beforeend", markup);
 
-    const elPopup = this.container.querySelector('.popup');
-    const close = elPopup.querySelector('.popup__close');
-    const popupWindow = elPopup.querySelector('.popup__window');
+    const elPopup = this.container.querySelector(".popup");
+    const close = elPopup.querySelector(".popup__close");
+    const popupWindow = elPopup.querySelector(".popup__window");
 
-    popupWindow.addEventListener('click', event => event.stopPropagation());
-    close.addEventListener('click', this.closePopup.bind(this));
-    elPopup.addEventListener('click', this.closePopup.bind(this));
+    popupWindow.addEventListener("click", (event) => event.stopPropagation());
+    close.addEventListener("click", this.closePopup.bind(this));
+    elPopup.addEventListener("click", this.closePopup.bind(this));
   }
 
   closePopup() {
@@ -25,7 +25,7 @@ export default class Popup {
   }
 
   removePopup() {
-    const items = this.container.querySelectorAll('.popup');
+    const items = this.container.querySelectorAll(".popup");
 
     if (items.length) {
       items.forEach((item) => {
@@ -35,7 +35,7 @@ export default class Popup {
   }
 
   markup(data) {
-    const title = data.title ? data.title : 'Сообщение';
+    const title = data.title ? data.title : "Сообщение";
 
     return `
       <div class="popup">

@@ -5,7 +5,7 @@ import onClickFiles from "./handlers/onClickFiles";
 import onKeypressMessage from "./handlers/onKeypressMessage";
 import onChangeFiles from "./handlers/onChangeFiles";
 import onDropFiles from "./handlers/onDropFiles";
-import {initSchedule} from "./handlers/schedule";
+import { initSchedule } from "./handlers/schedule";
 import onClickAudio from "./handlers/onClickAudio";
 import onClickVideo from "./handlers/onClickVideo";
 
@@ -25,22 +25,33 @@ export default class Workspace {
   }
 
   subscribeOnEvents() {
-    const elMessage = this.app.querySelector('#message');
-    const fileContainer = this.app.querySelector('.footer__files');
-    const fileInput = fileContainer.querySelector('.form__input-files');
-    const chatContainer = this.app.querySelector('.content');
-    const btnAudio = this.app.querySelector('.footer__audio');
-    const btnVideo = this.app.querySelector('.footer__video');
+    const elMessage = this.app.querySelector("#message");
+    const fileContainer = this.app.querySelector(".footer__files");
+    const fileInput = fileContainer.querySelector(".form__input-files");
+    const chatContainer = this.app.querySelector(".content");
+    const btnAudio = this.app.querySelector(".footer__audio");
+    const btnVideo = this.app.querySelector(".footer__video");
 
     this.webSoc.fetchMessage();
     this.webSoc.loadMessage(onScroll.bind(null, this.user));
-    elMessage.addEventListener('keypress', onKeypressMessage.bind(null, this.webSoc, this.user, this.schedule));
-    fileContainer.addEventListener('click', onClickFiles.bind(null, fileInput));
-    fileInput.addEventListener('change', onChangeFiles);
-    chatContainer.addEventListener('dragover', event => event.preventDefault());
-    chatContainer.addEventListener('drop', onDropFiles.bind(null, fileInput));
-    btnAudio.addEventListener('click', onClickAudio.bind(null, this.user, this.webSoc));
-    btnVideo.addEventListener('click', onClickVideo.bind(null, this.user, this.webSoc));
+    elMessage.addEventListener(
+      "keypress",
+      onKeypressMessage.bind(null, this.webSoc, this.user, this.schedule),
+    );
+    fileContainer.addEventListener("click", onClickFiles.bind(null, fileInput));
+    fileInput.addEventListener("change", onChangeFiles);
+    chatContainer.addEventListener("dragover", (event) =>
+      event.preventDefault(),
+    );
+    chatContainer.addEventListener("drop", onDropFiles.bind(null, fileInput));
+    btnAudio.addEventListener(
+      "click",
+      onClickAudio.bind(null, this.user, this.webSoc),
+    );
+    btnVideo.addEventListener(
+      "click",
+      onClickVideo.bind(null, this.user, this.webSoc),
+    );
   }
 
   renderChat() {
@@ -48,7 +59,7 @@ export default class Workspace {
   }
 
   markup() {
-    const avatar = require('../../../images/avatar.png');
+    const avatar = require("../../../images/avatar.png");
 
     return `
       <div class="header">

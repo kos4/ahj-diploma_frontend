@@ -1,3 +1,3 @@
-export default function onClickFiles (fileInput) {
-  fileInput.dispatchEvent(new MouseEvent('click'));
+export default function onClickFiles(fileInput) {
+  fileInput.dispatchEvent(new MouseEvent("click"));
 }

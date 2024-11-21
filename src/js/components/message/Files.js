@@ -1,17 +1,17 @@
 export default class Files {
   render(files) {
-    let html = '';
+    let html = "";
 
     for (let type in files) {
-      files[type].forEach(file => {
+      files[type].forEach((file) => {
         switch (type) {
-          case 'image':
+          case "image":
             html += this.markupImage(file);
             break;
-          case 'audio':
+          case "audio":
             html += this.markupAudio(file);
             break;
-          case 'video':
+          case "video":
             html += this.markupVideo(file);
             break;
           default:
@@ -19,7 +19,6 @@ export default class Files {
         }
       });
     }
-
 
     return `<div class="filesUploadList">${html}</div>`;
   }

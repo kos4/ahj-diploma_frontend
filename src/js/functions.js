@@ -1,11 +1,3 @@
-export function debounce(func, ms) {
-  let timeout;
-  return function (number, id, onLoadMore) {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(this, arguments), ms);
-  };
-}
-
 export function convertLink(text) {
   const regex = /(http[s]*:\/\/(\S+))/gm;
   const subst = `<a href="$1" target="_blank">$2</a>`;
@@ -15,11 +7,11 @@ export function convertLink(text) {
 
 export function dateFormat(date) {
   return new Date(date).toLocaleDateString(undefined, {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
   });
 }
 
@@ -28,5 +20,5 @@ export function formDataToJson(data) {
 }
 
 export function ext(name) {
-  return name.match(/\.([^.]+)$|$/)[1]
+  return name.match(/\.([^.]+)$|$/)[1];
 }
