@@ -2,7 +2,7 @@ import Message from "../components/message/Message";
 
 export default class WebSoc {
   constructor(user) {
-    this.host = "ws://localhost:8082";
+    this.host = "wss://ahj-diploma-backend-7xgh.onrender.com/";
     this.user = user;
     this.message = new Message();
     this.websocket = new WebSocket(this.host);
